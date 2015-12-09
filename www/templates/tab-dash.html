@@ -1,29 +1,15 @@
-<ion-view view-title="Dashboard">
+<ion-view view-title="Feed">
   <ion-content class="padding">
     <button class="button button-positive" ng-click="getPhoto()">Take Photo</button>
-	<div class="list card">
-      <div class="item item-divider">Live Update</div>
-      <div class="item item-body">
-        <div>
-          There is a fire in <b>sector 3</b>
-        </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Health</div>
-      <div class="item item-body">
-        <div>
-          You ate an apple today!
-        </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Upcoming</div>
-      <div class="item item-body">
-        <div>
-          You have <b>29</b> meetings on your calendar tomorrow.
-        </div>
-      </div>
-    </div>
-  </ion-content>
+	<div class="list card"><div class="item" ng-repeat="posts in postList">
+      <div>{{posts.author}}</div>
+      <div>{{posts.imageFile}}</div>
+    </div></div>
+    <div>
+  <button class="button" ng-click="savePerson('Nic', 'Raboy')">Save Nic Raboy</button>
+    <button class="button" ng-click="savePerson('Maria', 'Campos')">Save Maria Campos</button>
+    <button class="button" ng-click="savePerson('Bruce', 'Raboy')">Save Bruce Raboy</button>
+    <button class="button" ng-click="getPosts()">Log Posts</button>
+    <button class="button" ng-click="getPeople({lastname: 'Raboy'})">Print All Raboys</button></div>
+</ion-content>
 </ion-view>

@@ -20,6 +20,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+	Parse.initialize("V7yOmbIQeFZ6Eo6n85U88fTp3Cf4gbArEMdehArF","ikxT8K3uFBVopvH8Jui0ktQ92gYto7vGC1umyvLu");
   });
 })
 
@@ -40,12 +41,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
   // Each tab has its own nav history stack:
 
-  .state('tab.dash', {
-    url: '/dash',
+  .state('tab.feed', {
+    url: '/feed',
     views: {
-      'tab-dash': {
+      'tab-feed': {
         templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
+        controller: 'FeedCtrl'
       }
     }
   })
@@ -80,6 +81,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/feed');
 
 });

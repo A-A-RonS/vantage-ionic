@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope,Camera) {
-
+.controller('FeedCtrl', function($scope,Camera) {
+$scope.postList = [];
 $scope.getPhoto = function(){
 Camera.getPicture().then(function(imageURI) {
       console.log(imageURI);
@@ -9,6 +9,38 @@ Camera.getPicture().then(function(imageURI) {
       console.err(err);
     });
   };
+  
+  	$scope.savePerson = function(firstname, lastname) {
+		var PeopleObject = Parse.Object.extend("PeopleObject");
+		var person = new PeopleObject();
+		person.set("firstname",firstname);
+		person.set("lastname",lastname);
+		person.save(null,{});
+	};
+	
+	$scope.getPosts = function(params) {
+		
+    	var Post = Parse.Object.extend("Post");
+    	var query = new Parse.Query(Post);
+    	query.find({
+        	success: function(results) {
+            	alert("Successfully retrieved " + results.length + " people!");
+            	$scope.postList = results;
+				console.log("results:"+$scope.postList);
+        	},
+        	error: function(error) {
+            	alert("Error: " + error.code + " " + error.message);
+        	}
+    	});
+	};
+
+	$scope.$broadcast('result', $scope.getPosts());
+
+  $scope.$on('newMessage', function(event, messages) {
+   console.log("WOW, a new message!!! ");
+   $scope.$apply();
+
+});
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {
@@ -24,6 +56,10 @@ Camera.getPicture().then(function(imageURI) {
   $scope.remove = function(chat) {
     Chats.remove(chat);
   };
+})
+
+.controller('ParseCtrl',function($scope){
+
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
